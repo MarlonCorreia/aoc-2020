@@ -26,7 +26,7 @@ func part1()  {
 		line, _ := strconv.Atoi(scanner.Text()) 
 		ids[line] = line
 
-		if val, boo := ids[target - line]; boo {
+		if val, boo := ids[target - line]; boo && val != line {
 			fmt.Println(val * line)
 			return
 		}
