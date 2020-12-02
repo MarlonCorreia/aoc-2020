@@ -25,11 +25,10 @@ func part1()  {
     for scanner.Scan() {
 		line, _ := strconv.Atoi(scanner.Text()) 
 		ids[line] = line
-		var want = target - line
 
-		if val, boo := ids[want]; boo {
+		if val, boo := ids[target - line]; boo {
 			fmt.Println(val * line)
-			break
+			return
 		}
 	} 
 		
@@ -48,9 +47,8 @@ func part2()  {
 		ids[line] = line
 		
 		for value := range ids {
-			var want = target - line - value
 
-			if val, boo := ids[want]; boo {
+			if val, boo := ids[target - line - value]; boo {
 				fmt.Println(line * value * val)
 				return
 			}
