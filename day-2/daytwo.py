@@ -4,13 +4,13 @@ RESP_2 = 0
 
 def part1(letter, passw, min, max):
     global RESP_1
-    if int(min) <= passw.count(letter) and int(max) >= passw.count(letter):
+    if min <= passw.count(letter) and max >= passw.count(letter):
         RESP_1 = RESP_1 + 1
 
 
 def part2(letter, passw, min, max):
     global RESP_2
-    if (passw[int(min) - 1] == letter and passw[int(max) - 1] != letter) or (passw[int(min) - 1] != letter and passw[int(max) - 1] == letter):
+    if (passw[min - 1] == letter and passw[max - 1] != letter) or (passw[min - 1] != letter and passw[max - 1] == letter):
         RESP_2 = RESP_2 + 1
 
 
@@ -19,8 +19,8 @@ if __name__ == "__main__":
         for line in f.readlines():
             letter = line.split()[1].strip(":")
             passw = line.split()[2]
-            min = line.split()[0].split("-")[0]
-            max = line.split()[0].split("-")[1]
+            min = int(line.split()[0].split("-")[0])
+            max = int(line.split()[0].split("-")[1])
         
             part1(letter, passw, min, max)
             part2(letter, passw, min, max)
