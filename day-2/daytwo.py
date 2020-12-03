@@ -1,38 +1,33 @@
 
 
+#solution = [643, 388]
 
-def part1():
-    resp = 0
-    with open("input.csv") as f:
-        for line in f.readlines():
-            general = line.split()
-            letter = general[1].split(":")[0]
-            count = general[0].split("-")
-            passw = general[2]
-            
-        
 
-            if int(count[0]) <= passw.count(letter) and int(count[1]) >= passw.count(letter):
-                resp += 1
+RESP_1 = 0
+RESP_2 = 0
 
-    print(resp)
+def part1(letter, passw, min, max):
+    global RESP_1
+    if int(min) <= passw.count(letter) and int(max) >= passw.count(letter):
+        RESP_1 = RESP_1 + 1
 
-def part2():
-    resp = 0
-    with open("input.csv") as f:
-            for line in f.readlines():
-                general = line.split()
-                letter = general[1].split(":")[0]
-                count = general[0].split("-")
-                passw = list(general[2])
 
-                
-                if (passw[int(count[0]) - 1] == letter and passw[int(count[1]) - 1] != letter) or (passw[int(count[0]) - 1] != letter and passw[int(count[1]) - 1] == letter):
-                    resp += 1
-
-            print(resp)
+def part2(letter, passw, min, max):
+    global RESP_2
+    if (passw[int(min) - 1] == letter and passw[int(max) - 1] != letter) or (passw[int(min) - 1] != letter and passw[int(max) - 1] == letter):
+        RESP_2 = RESP_2 + 1
 
 
 if __name__ == "__main__":
-    part1()
-    part2()
+    with open("input.csv") as f:
+        for line in f.readlines():
+            letter = line.split()[1].strip(":")
+            passw = line.split()[2]
+            min = line.split()[0].split("-")[0]
+            max = line.split()[0].split("-")[1]
+        
+            part1(letter, passw, min, max)
+            part2(letter, passw, min, max)
+
+    print(RESP_1)
+    print(RESP_2)
