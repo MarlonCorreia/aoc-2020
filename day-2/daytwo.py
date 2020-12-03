@@ -1,8 +1,4 @@
 
-
-#solution = [643, 388]
-
-
 RESP_1 = 0
 RESP_2 = 0
 
