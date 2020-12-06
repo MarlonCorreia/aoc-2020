@@ -1,36 +1,28 @@
 from collections import Counter
 
-def part1():
-    with open("input.csv") as f:
-        qtd = 0
-        file = f.read().split("\n\n")
-        for line in file:
-            line = line.replace("\n", "")
-            
-            s = set(line)
-            qtd += len(s) 
+def part1(file):
+    qtd = 0 
+    for line in file:
+        line = set(line.replace("\n", ""))    
+        qtd += len(line) 
         
-        print(qtd)
+    return qtd
 
-def part2():
-    with open("input.csv") as f:
-        qtd = 0
-        file = f.read().split("\n\n")
-        for line in file:
-            ap = []
-            for l in line.split("\n"):
-                for stuf in l:
-                    ap.append(stuf)
-            
+def part2(file):
+    qtd = 0
+    for line in file:
+        commom_ids = [item for item, repetition in Counter([val for x in line.split("\n") for val in x]).items() if repetition == len(line.split("\n"))]
+        qtd += len(commom_ids)
 
-            c = Counter(ap)
-            commom_ids = [k for k, v in c.items() if v == len(line.split("\n"))]
-
-            qtd += len(commom_ids)
-
-        print(qtd)
+    return qtd
 
 if __name__ == "__main__":
-    part1()
-    part2()
+    with open("input.csv") as f:
+        file = f.read().split("\n\n")
+        solution_1 = part1(file)
+        solution_2 = part2(file)
 
+    print(solution_1)
+    print(solution_2)
+
+ 
