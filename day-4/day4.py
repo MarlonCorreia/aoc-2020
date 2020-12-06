@@ -11,15 +11,24 @@ def part1(file):
 def part2(file):
     qtd = 0 
     for key in file:
-        if set(key).issuperset(set(obligatory)):
-            if ("cm" in key["hgt"] and 193 >= int(key["hgt"].strip("cm")) >= 150) or ("in" in key["hgt"] and 76 >= int(key["hgt"].strip("in")) >= 59):
-                if key["ecl"] in ["amb", "blu", "brn", "gry", "grn", "hzl", "oth"]:
-                    if re.search(r'^#(?:[0-9a-fA-F]{3}){1,2}$', key["hcl"]):                               
-                        if 2030 >= int(key["eyr"]) >= 2020:
-                            if 2020 >= int(key["iyr"]) >= 2010:
-                                if 2002 >= int(key["byr"]) >= 1920:
-                                    if len(key["pid"]) == 9:
-                                        qtd += 1                            
+        if not set(key).issuperset(set(obligatory)):
+            continue
+        if not ("cm" in key["hgt"] and 193 >= int(key["hgt"].strip("cm")) >= 150) or ("in" in key["hgt"] and 76 >= int(key["hgt"].strip("in")) >= 59):
+            continue
+        if not key["ecl"] in ["amb", "blu", "brn", "gry", "grn", "hzl", "oth"]:
+            continue
+        if not re.search(r'^#(?:[0-9a-fA-F]{3}){1,2}$', key["hcl"]):
+            continue                               
+        if not 2030 >= int(key["eyr"]) >= 2020:
+            continue
+        if not 2020 >= int(key["iyr"]) >= 2010:
+            continue
+        if not 2002 >= int(key["byr"]) >= 1920:
+            continue
+        if not len(key["pid"]) == 9:
+            continue
+        qtd += 1       
+                             
     return qtd
 
 
