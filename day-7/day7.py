@@ -18,17 +18,16 @@ with open("input.csv") as f:
 
 
 
-
-def find_qtd(group, query):
+def part1(group, query):
     found = []
     for k in group.keys():
         if query in dic[k]:
             found.append(k)
-            found.extend(find_qtd(group, k))
+            found.extend(part1(group, k))
     return found
             
 
 
 
-res = find_qtd(dic, my_bag)
+res = part1(dic, my_bag)
 print(len(set(res)))
